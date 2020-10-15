@@ -1,11 +1,13 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 
-const TaskList = ({title}) => {
+const TaskList = ({ title }) => {
     return (
-        <View>
-            <Text style={styles.taskItem}>{title}</Text>
-        </View>
+        <TouchableOpacity onLongPress={() => console.log('this is clicked')}>
+            <View>
+                <Text style={styles.taskItem}>{title}</Text>
+            </View>
+        </TouchableOpacity>
     );
 }
 
