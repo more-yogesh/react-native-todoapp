@@ -1,21 +1,34 @@
+import React, { useState } from 'react';
+import { StyleSheet, Text, TextInput, View, Button, FlatList } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import TaskList from './components/TaskList';
+import TaskForm from './components/TaskForm';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+
+    const [taskItems, setTaskItems] = useState([]);
+
+    const onPressHandler = enteredTask => {
+        setTaskItems(taskItems => [...taskItems, enteredTask]);
+    }
+
+    return (
+        <View style={styles.container}>
+            <View style={styles.inputForm}>
+                <TaskForm onAddTask={onPressHandler} />
+            </View>
+            <FlatList
+                data={taskItems}
+                renderItem={(taskData) => <TaskList title={taskData.item} />} />
+            <StatusBar style="auto" />
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        margin: 10,
+        marginTop: 50,
+        backgroundColor: '#fff',
+    }
 });
